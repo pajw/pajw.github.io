@@ -1,0 +1,19 @@
+{
+  "name": "pajwilson.com",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "author": "Paul Wilson <paul@pajwilson.com>",
+  "description": "Personal site and blog for Paul Wilson.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "5.18.2",
+    "@astrojs/rss": "4.0.18",
+    "@astrojs/sitemap": "3.7.3"
+  }
+}

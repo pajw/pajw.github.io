@@ -1,0 +1,35 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+function formatDate(date: Date) {
+  return date.toISOString().slice(0, 10);
+}
+---
+
+<Layout title={post.data.title} description={post.data.description}>
+  <article>
+    <h1>{post.data.title}</h1>
+    <p class="muted post-meta">
+      {formatDate(post.data.pubDate)}
+      {
+        post.data.updatedDate && (
+          <span>&nbsp;&middot; Updated {formatDate(post.data.updatedDate)}</span>
+        )
+      }
+    </p>
+    <Content />
+  </article>
+  <a class="back" href="/">&larr; Back to writing</a>
+</Layout>
