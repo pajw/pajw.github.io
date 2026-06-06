@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Pilcrow mark">
+  <style>
+    .bg { fill: #faf4e3; }
+    .mark { fill: #1d3b87; }
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #15140f; }
+      .mark { fill: #d4a536; }
+    }
+  </style>
+  <rect class="bg" width="32" height="32" rx="5" />
+  <text
+    class="mark"
+    x="16"
+    y="25"
+    text-anchor="middle"
+    font-family="ui-serif, Georgia, 'Times New Roman', serif"
+    font-weight="600"
+    font-size="24"
+  >¶</text>
+</svg>
