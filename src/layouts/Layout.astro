@@ -1,14 +1,16 @@
 ---
+import { Font } from 'astro:assets';
 import '../styles/global.css';
 
 interface Props {
   title: string;
   description: string;
-  wide?: boolean;
+  variant?: 'with-margin' | 'single';
 }
 
-const { title, description, wide = false } = Astro.props;
+const { title, description, variant = 'single' } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const hasMargin = variant === 'with-margin' && Astro.slots.has('margin');
 ---
 
 <!doctype html>
@@ -29,10 +31,28 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
       title="Paul Wilson"
       href="/rss.xml"
     />
+    <Font cssVariable="--font-serif" preload />
+    <Font cssVariable="--font-sans" preload />
+    <Font cssVariable="--font-mono" />
   </head>
   <body>
-    <main class={wide ? 'wide' : undefined}>
-      <slot />
-    </main>
+    {
+      variant === 'with-margin' ? (
+        <div class="layout-with-margin">
+          <main>
+            <slot />
+          </main>
+          {hasMargin && (
+            <aside class="margin">
+              <slot name="margin" />
+            </aside>
+          )}
+        </div>
+      ) : (
+        <main class="layout-single">
+          <slot />
+        </main>
+      )
+    }
   </body>
 </html>
