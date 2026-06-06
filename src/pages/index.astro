@@ -4,6 +4,9 @@ import Layout from '../layouts/Layout.astro';
 
 const description = 'Engineer, web & agents';
 
+// Set this to a short two-or-three-sentence bio when ready; null hides the block.
+const bio: string | null = null;
+
 const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
 );
@@ -17,11 +20,7 @@ function formatDate(date: Date) {
   <h1>Paul Wilson</h1>
   <p class="tagline">{description}</p>
 
-  {/* TODO: replace placeholder bio with two or three real sentences. */}
-  <p class="bio">
-    [Placeholder bio. Two or three sentences here on what you build, who
-    you work with, and what you write about.]
-  </p>
+  {bio && <p class="bio">{bio}</p>}
 
   <p class="links">
     <a href="https://github.com/pajw">GitHub</a>,
@@ -30,24 +29,24 @@ function formatDate(date: Date) {
     <a href="/rss.xml">RSS</a>
   </p>
 
-  <h2>Writing</h2>
   {
-    posts.length === 0 ? (
-      <p class="empty">Nothing here yet.</p>
-    ) : (
-      <ul class="posts">
-        {posts.map((post) => (
-          <li>
-            <div class="post-date">{formatDate(post.data.pubDate)}</div>
-            <div>
-              <a class="post-title" href={`/blog/${post.id}/`}>
-                {post.data.title}
-              </a>
-              <p class="post-desc">{post.data.description}</p>
-            </div>
-          </li>
-        ))}
-      </ul>
+    posts.length > 0 && (
+      <>
+        <h2>Writing</h2>
+        <ul class="posts">
+          {posts.map((post) => (
+            <li>
+              <div class="post-date">{formatDate(post.data.pubDate)}</div>
+              <div>
+                <a class="post-title" href={`/blog/${post.id}/`}>
+                  {post.data.title}
+                </a>
+                <p class="post-desc">{post.data.description}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </>
     )
   }
 
@@ -55,18 +54,11 @@ function formatDate(date: Date) {
     <div class="note">
       <strong>Colophon</strong>
       Set in <em>Source Serif 4</em> with <em>Source Sans 3</em>; code in
-      <code>IBM Plex Mono</code>. Greyscale palette, colour reserved for
-      figures.
+      <code>IBM Plex Mono</code>.
     </div>
     <div class="note">
       <strong>Feed</strong>
-      <a href="/rss.xml">RSS</a>, with all posts listed above.
-    </div>
-    <div class="note">
-      <strong>Built with</strong>
-      <a href="https://astro.build">Astro</a>, hosted on
-      <a href="https://pages.github.com">GitHub Pages</a>. Source on
-      <a href="https://github.com/pajw/pajw.github.io">GitHub</a>.
+      <a href="/rss.xml">RSS</a>.
     </div>
   </Fragment>
 </Layout>
