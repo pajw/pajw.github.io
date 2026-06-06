@@ -424,8 +424,9 @@ article li {
   margin: 0.4rem 0;
 }
 
-/* Drop cap on the first paragraph of the post body */
-article > p:first-of-type::first-letter {
+/* Drop cap on the first paragraph of the post body. The wrapper around
+   <Content /> is intentional so this selector is not stolen by .post-meta. */
+.post-body > p:first-of-type::first-letter {
   font-family: var(--font-serif-stack);
   font-weight: 600;
   font-variation-settings: "opsz" 144, "SOFT" 50, "WONK" 1;
