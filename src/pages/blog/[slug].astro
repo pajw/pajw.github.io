@@ -25,7 +25,7 @@ function formatDate(date: Date) {
   folio={`fol. ${post.id}`}
 >
   <article>
-    <h1>{post.data.title}</h1>
+    <h1 transition:name={`post-title-${post.id}`}>{post.data.title}</h1>
     <p class="post-meta">
       <time datetime={post.data.pubDate.toISOString()}>
         {formatDate(post.data.pubDate)}

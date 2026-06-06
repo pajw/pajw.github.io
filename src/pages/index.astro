@@ -48,7 +48,11 @@ function formatDate(date: Date) {
             <li>
               <div class="post-date">{formatDate(post.data.pubDate)}</div>
               <div>
-                <a class="post-title" href={`/blog/${post.id}/`}>
+                <a
+                  class="post-title"
+                  href={`/blog/${post.id}/`}
+                  transition:name={`post-title-${post.id}`}
+                >
                   {post.data.title}
                 </a>
                 <p class="post-desc">{post.data.description}</p>
