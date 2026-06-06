@@ -2,8 +2,16 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Not found." description="Page not found.">
-  <h1>Not found.</h1>
-  <p class="post-meta">The page you asked for isn't here.</p>
-  <p><a href="/">&larr; Back home</a></p>
+<Layout
+  title="Not here."
+  description="The page is not here."
+  folio="fol. ø · missing"
+>
+  <div class="not-found">
+    <h1>Not here.</h1>
+    <p>
+      The page you wanted is somewhere else, or never was. Try the
+      <a href="/">index</a>.
+    </p>
+  </div>
 </Layout>

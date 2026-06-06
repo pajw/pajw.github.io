@@ -4,7 +4,7 @@ import Layout from '../layouts/Layout.astro';
 
 const description = 'Engineer, web & agents';
 
-// Set this to a short two-or-three-sentence bio when ready; null hides the block.
+// Two or three sentences once written. Leave as null to hide the block.
 const bio: string | null = null;
 
 const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
@@ -16,22 +16,32 @@ function formatDate(date: Date) {
 }
 ---
 
-<Layout title="Paul Wilson" description={description} variant="with-margin">
-  <h1>Paul Wilson</h1>
-  <p class="tagline">{description}</p>
+<Layout
+  title="Paul Wilson"
+  description={description}
+  variant="home"
+  folio="fol. i · home"
+>
+  <header class="masthead stagger">
+    <h1>Paul Wilson</h1>
+    <p class="tagline">{description}</p>
+  </header>
 
-  {bio && <p class="bio">{bio}</p>}
+  {bio && <p class="bio stagger">{bio}</p>}
 
-  <p class="links">
-    <a href="https://github.com/pajw">GitHub</a>,
-    <a href="https://linkedin.com/in/paul-wilson-9762b281">LinkedIn</a>,
-    <a href="mailto:paul@pajwilson.com">Email</a>,
-    <a href="/rss.xml">RSS</a>
+  <p class="correspondence stagger">
+    <a href="https://github.com/pajw">github</a>
+    <span>·</span>
+    <a href="https://linkedin.com/in/paul-wilson-9762b281">linkedin</a>
+    <span>·</span>
+    <a href="mailto:paul@pajwilson.com">paul@pajwilson.com</a>
+    <span>·</span>
+    <a href="/rss.xml">rss</a>
   </p>
 
   {
     posts.length > 0 && (
-      <>
+      <section class="writing stagger">
         <h2>Writing</h2>
         <ul class="posts">
           {posts.map((post) => (
@@ -46,19 +56,25 @@ function formatDate(date: Date) {
             </li>
           ))}
         </ul>
-      </>
+      </section>
     )
   }
 
   <Fragment slot="margin">
-    <div class="note">
-      <strong>Colophon</strong>
-      Set in <em>Source Serif 4</em> with <em>Source Sans 3</em>; code in
-      <code>IBM Plex Mono</code>.
+    <div class="note stagger">
+      <span class="pilcrow">¶ colophon</span>
+      Set in <em>Fraunces</em> with <em>IBM Plex Mono</em> for the
+      system voice. Warm paper by day, candlelit ink by night.
+      Built with <a href="https://astro.build">Astro</a>.
     </div>
-    <div class="note">
-      <strong>Feed</strong>
-      <a href="/rss.xml">RSS</a>.
+    <div class="note stagger">
+      <span class="pilcrow">¶ source</span>
+      <a href="https://github.com/pajw/pajw.github.io">on github</a>,
+      hosted on <a href="https://pages.github.com">github pages</a>.
+    </div>
+    <div class="note stagger">
+      <span class="pilcrow">¶ feed</span>
+      <a href="/rss.xml">rss</a>, for those who keep a reader.
     </div>
   </Fragment>
 </Layout>

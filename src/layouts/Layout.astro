@@ -5,12 +5,19 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description: string;
-  variant?: 'with-margin' | 'single';
+  variant?: 'home' | 'single';
+  folio?: string;
 }
 
-const { title, description, variant = 'single' } = Astro.props;
+const {
+  title,
+  description,
+  variant = 'single',
+  folio = '',
+} = Astro.props;
+
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const hasMargin = variant === 'with-margin' && Astro.slots.has('margin');
+const hasMargin = variant === 'home' && Astro.slots.has('margin');
 ---
 
 <!doctype html>
@@ -32,13 +39,13 @@ const hasMargin = variant === 'with-margin' && Astro.slots.has('margin');
       href="/rss.xml"
     />
     <Font cssVariable="--font-serif" preload />
-    <Font cssVariable="--font-sans" preload />
     <Font cssVariable="--font-mono" />
   </head>
   <body>
+    {folio && <div class="folio">{folio}</div>}
     {
-      variant === 'with-margin' ? (
-        <div class="layout-with-margin">
+      variant === 'home' ? (
+        <div class="layout-home">
           <main>
             <slot />
           </main>

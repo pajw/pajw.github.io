@@ -6,35 +6,29 @@ export default defineConfig({
   integrations: [sitemap()],
   experimental: {
     fonts: [
-    {
-      provider: fontProviders.google(),
-      name: 'Source Serif 4',
-      cssVariable: '--font-serif',
-      weights: ['400 700'],
-      styles: ['normal', 'italic'],
-      subsets: ['latin'],
-    },
-    {
-      provider: fontProviders.google(),
-      name: 'Source Sans 3',
-      cssVariable: '--font-sans',
-      weights: ['400 700'],
-      subsets: ['latin'],
-    },
-    {
-      provider: fontProviders.google(),
-      name: 'IBM Plex Mono',
-      cssVariable: '--font-mono',
-      weights: [400, 500],
-      subsets: ['latin'],
-    },
+      {
+        provider: fontProviders.google(),
+        name: 'Fraunces',
+        cssVariable: '--font-serif',
+        weights: ['100 900'],
+        styles: ['normal', 'italic'],
+        subsets: ['latin'],
+      },
+      {
+        provider: fontProviders.google(),
+        name: 'IBM Plex Mono',
+        cssVariable: '--font-mono',
+        weights: [400, 500],
+        styles: ['normal', 'italic'],
+        subsets: ['latin'],
+      },
     ],
   },
   markdown: {
     shikiConfig: {
       themes: {
-        light: 'github-light',
-        dark: 'github-dark',
+        light: 'rose-pine-dawn',
+        dark: 'rose-pine-moon',
       },
     },
   },
