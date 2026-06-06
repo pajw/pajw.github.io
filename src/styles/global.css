@@ -534,6 +534,112 @@ pre > code {
 }
 
 /* ============================================================
+   SIDENOTES AND MARGIN NOTES (Tufte CSS pure-CSS pattern)
+
+   Usage inside markdown posts (raw HTML allowed in Astro markdown):
+
+     After this sentence<label for="sn-1"
+       class="margin-toggle sidenote-number"></label>
+     <input type="checkbox" id="sn-1" class="margin-toggle"/>
+     <span class="sidenote">The sidenote text appears here.</span>
+     the text continues.
+
+   Use sn- prefix for numbered sidenotes, mn- prefix for unnumbered
+   margin notes. On wide viewports sidenotes float into the empty
+   margin column; on narrow viewports they collapse to inline toggles.
+   ============================================================ */
+
+.post-body {
+  counter-reset: sidenote-counter;
+}
+
+.sidenote-number {
+  counter-increment: sidenote-counter;
+  cursor: pointer;
+}
+
+.sidenote-number::after {
+  content: counter(sidenote-counter);
+  font-family: var(--font-mono-stack);
+  font-size: 0.6em;
+  vertical-align: super;
+  color: var(--accent);
+  margin-left: 0.12em;
+  font-weight: 500;
+}
+
+.sidenote::before {
+  content: counter(sidenote-counter);
+  font-family: var(--font-mono-stack);
+  font-size: 0.72em;
+  color: var(--accent);
+  margin-right: 0.4em;
+  vertical-align: super;
+  font-weight: 500;
+}
+
+.sidenote,
+.marginnote {
+  float: right;
+  clear: right;
+  margin-right: -16rem;
+  width: 14rem;
+  margin-top: 0.3em;
+  margin-bottom: 1em;
+  font-family: var(--font-serif-stack);
+  font-size: 0.86rem;
+  line-height: 1.5;
+  font-style: italic;
+  color: var(--muted);
+  position: relative;
+  vertical-align: baseline;
+}
+
+input.margin-toggle {
+  display: none;
+}
+
+label.sidenote-number {
+  display: inline;
+}
+
+label.margin-toggle:not(.sidenote-number) {
+  display: none;
+}
+
+@media (max-width: 880px) {
+  label.margin-toggle:not(.sidenote-number) {
+    display: inline;
+    cursor: pointer;
+    font-family: var(--font-mono-stack);
+    font-size: 0.7em;
+    color: var(--accent);
+  }
+
+  label.margin-toggle:not(.sidenote-number)::after {
+    content: "+";
+    margin-left: 0.1em;
+  }
+
+  .sidenote,
+  .marginnote {
+    display: none;
+  }
+
+  .margin-toggle:checked + .sidenote,
+  .margin-toggle:checked + .marginnote {
+    display: block;
+    float: left;
+    width: 100%;
+    margin: 1rem 0;
+    vertical-align: baseline;
+    position: relative;
+    padding-left: 1rem;
+    border-left: 2px solid var(--accent-soft);
+  }
+}
+
+/* ============================================================
    RETURN LINK (post page)
    ============================================================ */
 
